@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1654865383728713961}
   - component: {fileID: -8198848171577113116}
   - component: {fileID: 2956994397909746930}
+  - component: {fileID: 6203574117233822858}
   m_Layer: 0
   m_Name: Dice_d6
   m_TagString: Untagged
@@ -181,3 +182,15 @@ MonoBehaviour:
   minRollTorque: 10
   maxRollTorque: 50
   isRolling: 0
+--- !u!114 &6203574117233822858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480525804154556286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bde64fc0de0ce4fa6690a360a50b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiceReader

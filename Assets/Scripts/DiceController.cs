@@ -14,10 +14,12 @@ public class DiceController : MonoBehaviour{
 
     private Rigidbody rb;
     private float rollTimer = 0f;
+    private DiceReader diceReader;
     public bool isRolling = false;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
+        diceReader = GetComponent<DiceReader>();
     }
 
     void FixedUpdate(){
@@ -27,7 +29,11 @@ public class DiceController : MonoBehaviour{
             if(rollTimer > 3f){
                 if(rb.linearVelocity.magnitude < 0.1f && rb.angularVelocity.magnitude < 0.1f){
                     isRolling = false;
-                    CheckDiceFace();
+                    if (diceReader != null){
+                        diceReader.ReadDiceFace();
+                    } else{
+                        Debug.LogWarning("dicereader not found on the dice object");
+                    }
                 }
             }
         }
@@ -53,8 +59,5 @@ public class DiceController : MonoBehaviour{
         }
     }
 
-    void CheckDiceFace(){
-        Debug.Log("Dice has stopped :)");
-       
-    }
+  
 }
