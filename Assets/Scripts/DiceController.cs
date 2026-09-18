@@ -15,6 +15,7 @@ public class DiceController : MonoBehaviour{
     private Rigidbody rb;
     private float rollTimer = 0f;
     private DiceReader diceReader;
+    private float settleTimer = 0f;
     public bool isRolling = false;
 
     void Awake(){
@@ -27,13 +28,20 @@ public class DiceController : MonoBehaviour{
             rollTimer += Time.fixedDeltaTime;
             //wait here a couple seconds before checking if the dice has stopped rolling
             if(rollTimer > 3f){
-                if(rb.linearVelocity.magnitude < 0.1f && rb.angularVelocity.magnitude < 0.1f){
-                    isRolling = false;
-                    if (diceReader != null){
-                        diceReader.ReadDiceFace();
+                if(rb.linearVelocity.magnitude < 0.05f && rb.angularVelocity.magnitude < 0.05f){
+                    settleTimer += Time.fixedDeltaTime;
+                    // if its staying still for half a second then we can assume it has stopped rolling
+                    if(settleTimer < 0.5f){
+                        isRolling = false;
+                        if (diceReader != null){
+                            diceReader.ReadDiceFace();
+                        } else{
+                            Debug.LogWarning("dicereader not found on the dice object");
+                        }
                     } else{
-                        Debug.LogWarning("dicereader not found on the dice object");
+                        settleTimer = 0f;
                     }
+                    
                 }
             }
         }
