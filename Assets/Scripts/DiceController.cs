@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 
 public class DiceController : MonoBehaviour{
     [SerializeField] 
-    private float minRollForce = 10f;
+    private float minRollForce = 15f;
     [SerializeField]
-    private float maxRollForce = 20f;
+    private float maxRollForce = 30f;
     [SerializeField]
-    private float minRollTorque = 10f;
+    private float minRollTorque = 15f;
     [SerializeField]
-    private float maxRollTorque = 20f;
+    private float maxRollTorque = 30f;
 
     private Rigidbody rb;
     private float rollTimer = 0f;
@@ -30,8 +30,8 @@ public class DiceController : MonoBehaviour{
             if(rollTimer > 3f){
                 if(rb.linearVelocity.magnitude < 0.05f && rb.angularVelocity.magnitude < 0.05f){
                     settleTimer += Time.fixedDeltaTime;
-                    // if its staying still for half a second then we can assume it has stopped rolling
-                    if(settleTimer < 0.5f){
+                    // if its staying still for a second then we can assume it has stopped rolling
+                    if(settleTimer < 1f){
                         isRolling = false;
                         if (diceReader != null){
                             diceReader.ReadDiceFace();
