@@ -17,8 +17,8 @@ public class DiceReader : MonoBehaviour{
         diceFaces = new DiceFace[]{
             new DiceFace(Vector3.up, 2),
             new DiceFace(Vector3.down, 5),
-            new DiceFace(Vector3.left, 4),
-            new DiceFace(Vector3.right, 3),
+            new DiceFace(Vector3.left, 3),
+            new DiceFace(Vector3.right, 4),
             new DiceFace(Vector3.forward, 1),
             new DiceFace(Vector3.back, 6)
         };
