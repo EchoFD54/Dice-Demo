@@ -17,6 +17,7 @@ public class DiceController : MonoBehaviour{
     private DiceReader diceReader;
     private float settleTimer = 0f;
     public bool isRolling = false;
+    public event Action OnRollStarted;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
@@ -59,6 +60,7 @@ public class DiceController : MonoBehaviour{
         if(!isRolling){
             rollTimer = 0f;
             isRolling = true;
+            OnRollStarted?.Invoke();
             float rollForce = UnityEngine.Random.Range(minRollForce, maxRollForce);
             float rollTorque = UnityEngine.Random.Range(minRollTorque, maxRollTorque);
             Vector3 throwDirection = new Vector3(UnityEngine.Random.Range(-1f, 1f), 1f, UnityEngine.Random.Range(-1f, 1f)).normalized;

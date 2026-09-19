@@ -1,6 +1,8 @@
 using UnityEngine;
+using System;   
 
 public class DiceReader : MonoBehaviour{
+    public event Action<int> OnDiceResult;
     private struct DiceFace{
         public Vector3 localDirection;
         public int value;
@@ -45,6 +47,7 @@ public class DiceReader : MonoBehaviour{
 
         if(highestDot > 0.9f){
             Debug.Log("Rolled result: " + rolledValue);
+            OnDiceResult?.Invoke(rolledValue);
          } else{
             Debug.Log("Dice landed in a weird way, try again");
         }
