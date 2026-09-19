@@ -11,17 +11,26 @@ public class DiceUI : MonoBehaviour{
     private Transform diceTransform;
     [SerializeField] 
     private TMP_Text resultText;
+    [SerializeField]
+    private TMP_Text weirdLandingText;
     // Offset do that the text is above the dice 
     [SerializeField] 
     private Vector3 offset = new Vector3(0, 2f, 0);
 
     private void HideText(){
         resultText.gameObject.SetActive(false);
+        weirdLandingText.gameObject.SetActive(false);
     }
 
     private void ShowResult(int result){
+        weirdLandingText.gameObject.SetActive(false);
         resultText.text = result.ToString();
         resultText.gameObject.SetActive(true);
+    }
+
+    private void ShowWeirdLanding(){
+        resultText.gameObject.SetActive(false);
+        weirdLandingText.gameObject.SetActive(true);
     }
 
     void OnEnable(){
@@ -34,6 +43,7 @@ public class DiceUI : MonoBehaviour{
 
         if(diceReader != null){
             diceReader.OnDiceResult += ShowResult;
+            diceReader.OnDiceWeirdLanding += ShowWeirdLanding;
         } else{
             Debug.LogWarning("diceReader is not assigned on DiceUI");
         }
@@ -46,6 +56,7 @@ public class DiceUI : MonoBehaviour{
 
         if(diceReader != null){
             diceReader.OnDiceResult -= ShowResult;
+            diceReader.OnDiceWeirdLanding -= ShowWeirdLanding;
         }
     }
 
@@ -65,4 +76,5 @@ public class DiceUI : MonoBehaviour{
             Debug.LogWarning("diceTransform is not assigned on DiceUI");
         }
     }
+    
 }

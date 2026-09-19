@@ -3,6 +3,7 @@ using System;
 
 public class DiceReader : MonoBehaviour{
     public event Action<int> OnDiceResult;
+    public event Action OnDiceWeirdLanding;
     private struct DiceFace{
         public Vector3 localDirection;
         public int value;
@@ -49,6 +50,7 @@ public class DiceReader : MonoBehaviour{
             Debug.Log("Rolled result: " + rolledValue);
             OnDiceResult?.Invoke(rolledValue);
          } else{
+            OnDiceWeirdLanding?.Invoke();
             Debug.Log("Dice landed in a weird way, try again");
         }
     }
