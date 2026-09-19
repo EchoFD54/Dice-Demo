@@ -27,6 +27,7 @@ public class DiceUI : MonoBehaviour{
     void OnEnable(){
         if(diceController != null){
             diceController.OnRollStarted += HideText;
+            diceController.OnDiceReset += HideText;
         } else{
             Debug.LogWarning("diceController is not assigned on DiceUI");
         }
