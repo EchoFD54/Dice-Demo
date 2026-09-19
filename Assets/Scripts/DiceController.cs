@@ -34,22 +34,21 @@ public class DiceController : MonoBehaviour{
             rollTimer += Time.fixedDeltaTime;
             //wait here a couple seconds before checking if the dice has stopped rolling
             if(rollTimer > 2f){
-                if(rb.linearVelocity.magnitude < 0.05f && rb.angularVelocity.magnitude < 0.05f){
+                if(rb.linearVelocity.magnitude < 0.03f && rb.angularVelocity.magnitude < 0.03f){
                     settleTimer += Time.fixedDeltaTime;
                     // if its staying still for a second then we can assume it has stopped rolling
-                    if(settleTimer < 1f){
+                    if(settleTimer > 0.5f){
                         isRolling = false;
                         if (diceReader != null){
                             diceReader.ReadDiceFace();
                         } else{
                             Debug.LogWarning("dicereader not found on the dice object");
                         }
-                    } else{
-                        settleTimer = 0f;
-                    }
-                    
+                    } 
+                } else{
+                    settleTimer = 0f;
                 }
-            }
+            } 
         }
     }
 
@@ -92,6 +91,9 @@ public class DiceController : MonoBehaviour{
 
         Debug.Log("Dice has been reset to the original position and rotation");
     }
+
+
+    
 
   
 }
