@@ -16,12 +16,17 @@ public class DiceController : MonoBehaviour{
     private float rollTimer = 0f;
     private DiceReader diceReader;
     private float settleTimer = 0f;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    public event Action OnDiceReset;
     public bool isRolling = false;
     public event Action OnRollStarted;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
         diceReader = GetComponent<DiceReader>();
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     void FixedUpdate(){
@@ -54,6 +59,10 @@ public class DiceController : MonoBehaviour{
             Debug.Log("space key was pressed and rolled the dice");
             Roll();
         }
+
+        if(Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame){
+            ResetDice();
+        }
     }
 
     void Roll(){
@@ -67,6 +76,21 @@ public class DiceController : MonoBehaviour{
             rb.AddForce(throwDirection * rollForce, ForceMode.Impulse);
             rb.AddTorque(UnityEngine.Random.insideUnitSphere * rollTorque, ForceMode.Impulse);
         }
+    }
+
+
+    void ResetDice(){
+        isRolling = false;
+        rollTimer = 0f;
+        settleTimer = 0f;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+        OnDiceReset?.Invoke();
+
+        Debug.Log("Dice has been reset to the original position and rotation");
     }
 
   

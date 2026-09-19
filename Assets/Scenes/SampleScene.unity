@@ -1346,7 +1346,7 @@ GameObject:
   - component: {fileID: 1838026620}
   - component: {fileID: 1838026619}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: 'DiceUI Canvas '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
