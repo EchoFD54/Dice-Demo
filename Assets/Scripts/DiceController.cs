@@ -36,7 +36,7 @@ public class DiceController : MonoBehaviour{
             if(rollTimer > 2f){
                 if(rb.linearVelocity.magnitude < 0.03f && rb.angularVelocity.magnitude < 0.03f){
                     settleTimer += Time.fixedDeltaTime;
-                    // if its staying still for a second then we can assume it has stopped rolling
+                    // if its staying still for half a second then we can assume it has stopped rolling
                     if(settleTimer > 0.5f){
                         isRolling = false;
                         if (diceReader != null){
